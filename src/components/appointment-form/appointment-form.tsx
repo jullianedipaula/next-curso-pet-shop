@@ -46,8 +46,9 @@ import {
   User,
 } from 'lucide-react'
 import { IMaskInput } from 'react-imask'
-import { format, min, setHours, setMinutes, startOfToday } from 'date-fns'
+import { format, setHours, setMinutes, startOfToday } from 'date-fns'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 const appointmentFormSchema = z
   .object({
@@ -95,6 +96,15 @@ export const AppointmentForm = () => {
   })
 
   const onSubmit = (data: AppointFormValues) => {
+    const [hour, minute] = data.time.split(':')
+
+    const scheduleAt = new Date(data.scheduleAt)
+    scheduleAt.setHours(Number(hour), Number(minute), 0, 0)
+
+    toast.success(`Agendamento criado com sucesso!`)
+
+    // invoca nossa SERVER ACTION
+
     console.log(data)
   }
 
