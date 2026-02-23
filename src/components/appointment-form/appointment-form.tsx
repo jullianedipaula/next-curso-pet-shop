@@ -49,6 +49,7 @@ import { IMaskInput } from 'react-imask'
 import { format, setHours, setMinutes, startOfToday } from 'date-fns'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
+import { createAppointment } from '@/app/actions'
 
 const appointmentFormSchema = z
   .object({
@@ -95,15 +96,18 @@ export const AppointmentForm = () => {
     },
   })
 
-  const onSubmit = (data: AppointFormValues) => {
+  const onSubmit = async (data: AppointFormValues) => {
     const [hour, minute] = data.time.split(':')
 
     const scheduleAt = new Date(data.scheduleAt)
     scheduleAt.setHours(Number(hour), Number(minute), 0, 0)
 
-    toast.success(`Agendamento criado com sucesso!`)
+    await createAppointment({
+      ...data,
+      scheduleAt,
+    })
 
-    // invoca nossa SERVER ACTION
+    toast.success(`Agendamento criado com sucesso!`)
 
     console.log(data)
   }
