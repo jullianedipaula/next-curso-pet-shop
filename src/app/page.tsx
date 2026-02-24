@@ -1,8 +1,9 @@
 import { AppointmentForm } from '@/components/appointment-form/appointment-form'
+import { DatePicker } from '@/components/date-picker'
 import { PeriodSection } from '@/components/period-section'
 import { Button } from '@/components/ui/button'
-import { groupAppointmentByPeriod } from '@/utils'
 import { prisma } from '@/lib/prisma'
+import { groupAppointmentByPeriod } from '@/utils'
 import { endOfDay, parseISO, startOfDay } from 'date-fns'
 
 export default async function Home({
@@ -29,7 +30,7 @@ export default async function Home({
 
   return (
     <div className="bg-background-primary p-6">
-      <div className="flex items-center justify-between md:mb-8">
+      <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-title-size text-content-primary mb-2">
             Sua Agenda
@@ -38,6 +39,14 @@ export default async function Home({
             Aqui você pode ver todos os clientes e serviços agendados para hoje.
           </p>
         </div>
+
+        <div className="hidden md:flex item-center gap-4">
+          <DatePicker />
+        </div>
+      </div>
+
+      <div className="mt-3 mb-8 md:hidden">
+        <DatePicker />
       </div>
 
       <div className="pb-24 md:pb-0">
