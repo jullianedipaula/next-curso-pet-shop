@@ -1,0 +1,8 @@
+ignoredBuiltDependencies:
+  - '@prisma/engines'
+  - core-js-pure
+  - lefthook
+  - msw
+  - prisma
+  - sharp
+  - unrs-resolver
